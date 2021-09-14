@@ -1,0 +1,11 @@
+.product-card { 
+    height: 463px; 
+}
+
+.btn-card {
+    padding: 12px;
+}
+
+.price-card {
+    line-height: 48px;
+}

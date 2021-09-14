@@ -1,0 +1,19 @@
+{
+    "name": "david/e-comairce",
+    "require": {
+        "symfony/var-dumper": "^5.3",
+        "altorouter/altorouter": "^2.0",
+        "cocur/slugify": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "eComairce\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Wabon95",
+            "email": "dbonaglia95@protonmail.com"
+        }
+    ]
+}
