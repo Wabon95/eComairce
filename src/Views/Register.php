@@ -8,7 +8,8 @@
                 <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Votre adresse email">
             </div>
             <div class="form-group mb-2">
-                <input type="password" class="form-control" name="inputPassword" id="inputPassword" placeholder="Votre mot de passe">
+                <input type="password" class="form-control" name="inputPassword" id="inputPassword" aria-describedby="passwordHelp" placeholder="Votre mot de passe">
+                <small id="passwordHelp" class="form-text text-muted">Votre mot de passe doit contenir 8 caractères minimum.</small>
             </div>
             <button type="submit" class="btn btn-success">S'inscrire</button>
         </div>
