@@ -44,6 +44,9 @@
                         <a class="nav-link" href="/profile">Bonjour <?= $connectedUser->getNickname() ?></a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/cart">Panier</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/logout">Se déconnecter</a>
                     </li>
                 <?php else: ?>

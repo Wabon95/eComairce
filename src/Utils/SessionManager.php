@@ -6,7 +6,8 @@ use eComairce\Entities\User;
 use eComairce\Utils\FlashMessage;
 use eComairce\Repositories\UserRepository;
 
-abstract class SessionManager {
+abstract class SessionManager
+{
 
     public static function connectUser(string $email, string $password) : User | bool
     {

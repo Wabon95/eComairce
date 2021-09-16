@@ -1,6 +1,6 @@
 <?php
 
-use eComairce\Utils\CustomFunctions;
+use eComairce\Utils\SessionManager;
 
 ?>
 
@@ -23,8 +23,10 @@ use eComairce\Utils\CustomFunctions;
                 <div class="card-footer">
                     <div class="row">
                         <div class="col-9">
-                            <button type="button" class="btn btn-card btn-info">Plus d'infos</button>
-                            <button type="button" class="btn btn-card btn-success">Panier</button>
+                            <a class="btn btn-card btn-info" href="/products/<?= $product->getSlug() ?>">Plus d'infos</a>
+                            <?php if (SessionManager::getConnectedUser()): ?>
+                                <a class="btn btn-card btn-info" href="/cart/add/<?= $product->getId() ?>">Panier</a>
+                            <?php endif; ?>
                         </div>
                         <div class="col-3">
                             <span class="text-right fw-bold price-card"><?= $product->getPrice() ?> €</span>
@@ -53,8 +55,8 @@ use eComairce\Utils\CustomFunctions;
                 <div class="card-footer">
                     <div class="row">
                         <div class="col-9">
-                            <button type="button" class="btn btn-card btn-info">Plus d'infos</button>
-                            <button type="button" class="btn btn-card btn-success">Panier</button>
+                            <a class="btn btn-card btn-info" href="/products/<?= $product->getSlug() ?>">Plus d'infos</a>
+                            <a class="btn btn-card btn-info" href="/cart/add/<?= $product->getId() ?>">Panier</a>
                         </div>
                         <div class="col-3">
                             <span class="text-right fw-bold price-card"><?= $product->getPrice() ?> €</span>

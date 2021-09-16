@@ -10,9 +10,20 @@ class ProductController extends CoreController
 {
     public function view_all()
     {
+        $products = ProductRepository::findAll();
+        shuffle($products);
         $this->render('Products/ViewAll', [
             'page_title' => 'eCormairce - Catalogue',
-            'products' => ProductRepository::findAll()
+            'products' => $products
+        ]);
+    }
+
+    public function view_one($slug)
+    {
+        $product = ProductRepository::findBySlug($slug);
+        $this->render('Products/ViewOne', [
+            'page_title' => 'eCormairce - ' . $product->getName(),
+            'product' => $product
         ]);
     }
 
@@ -29,8 +40,7 @@ class ProductController extends CoreController
             ->setDescription($_POST['textareaDescription'])
             ->setPrice($_POST['inputPrice'])
         ;
-        if ($product->validator()) {
-            ProductRepository::insert($product);
+        if (ProductRepository::insert($product)) {
             $this->redirect('/');
         } else {
             $this->redirect('/products/add', 'POST');

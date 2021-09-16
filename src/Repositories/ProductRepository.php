@@ -31,6 +31,60 @@ class ProductRepository
         return false;
     }
 
+    public static function find(int $id) : Product | bool
+    {
+        $sql = "
+            SELECT *
+            FROM `product`
+            WHERE id = :id
+        ";
+        $stmt = Database::getPDO()->prepare($sql);
+        $stmt->execute([
+            ':id' => $id
+        ]);
+
+        if ($p = $stmt->fetch()) {
+            $product = new Product();
+            $product
+                ->setId($p['id'])
+                ->setName($p['name'])
+                ->setDescription($p['description'])
+                ->setPrice($p['price'])
+            ;
+
+            return $product;
+        }
+
+        return false;
+    }
+
+    public static function findBySlug(string $slug) : Product | bool
+    {
+        $sql = "
+            SELECT *
+            FROM `product`
+            WHERE slug = :slug
+        ";
+        $stmt = Database::getPDO()->prepare($sql);
+        $stmt->execute([
+            ':slug' => $slug
+        ]);
+
+        if ($p = $stmt->fetch()) {
+            $product = new Product();
+            $product
+                ->setId($p['id'])
+                ->setName($p['name'])
+                ->setDescription($p['description'])
+                ->setPrice($p['price'])
+            ;
+
+            return $product;
+        }
+
+        return false;
+    }
+
     public static function findAll() : array | bool
     {
         $sql = "
