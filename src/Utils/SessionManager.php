@@ -3,6 +3,7 @@
 namespace eComairce\Utils;
 
 use eComairce\Entities\User;
+use eComairce\Entities\Product;
 use eComairce\Utils\FlashMessage;
 use eComairce\Repositories\UserRepository;
 
@@ -50,6 +51,70 @@ abstract class SessionManager
     {
         if (isset($_SESSION['user'])) {
             unset($_SESSION['user']);
+        }
+    }
+
+    public static function initCart()
+    {
+        if (!isset($_SESSION['cart'])) {
+            return $_SESSION['cart'] = [];
+        }
+        return $_SESSION['cart'];
+    }
+
+    public static function getCart(bool $objects = false) : array
+    {
+        self::initCart();
+
+        if ($objects) {
+            $products = [];
+            foreach ($_SESSION['cart'] as $p) {
+                $product = new Product();
+                $product
+                    ->setId($p['id'])
+                    ->setName($p['name'])
+                    ->setDescription($p['description'])
+                    ->setPrice($p['price'])
+                ;
+                $product->quantity = $p['quantity'];
+                $products[] = $product;
+
+                return $products;
+            }
+        }
+        return $_SESSION['cart'];
+    }
+
+    public static function addToCart(Product $product)
+    {
+        self::initCart();
+
+        if (array_key_exists($product->getId(), $_SESSION['cart'])) {
+            $_SESSION['cart'][$product->getId()]['quantity']++;
+
+            return $product;
+        }
+        return $_SESSION['cart'][$product->getId()] = [
+            'id' => $product->getId(),
+            'name' => $product->getName(),
+            'slug' => $product->getSlug(),
+            'description' => $product->getDescription(),
+            'price' => $product->getPrice(),
+            'quantity' => 1
+        ];
+    }
+
+    public static function removeFromCart(Product $product)
+    {
+        self::initCart();
+
+        if (array_key_exists($product->getId(), $_SESSION['cart'])) {
+            if ($_SESSION['cart'][$product->getId()]['quantity'] === 1) {
+                unset($_SESSION['cart'][$product->getId()]);
+            }
+            if (isset($_SESSION['cart'][$product->getId()])) {
+                $_SESSION['cart'][$product->getId()]['quantity']--;
+            }
         }
     }
 

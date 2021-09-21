@@ -57,6 +57,11 @@ Ce site est un site fictif de eComairce basique permettant d'acheter des produit
   - created_at `DATETIME`
   - updated_at `DATETIME`
 
+- cart
+  - id_user `INT`
+  - id_product `INT`
+  - quantity `INT`
+
 - order
   - id `INT`
   - reference `VARCHAR`

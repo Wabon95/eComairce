@@ -7,11 +7,11 @@ use eComairce\Utils\FlashMessage;
 
 class Product
 {
-    private Int $id;
-    private String $name;
-    private String $slug;
-    private String $description;
-    private Float $price;
+    private int $id;
+    private string $name;
+    private string $slug;
+    private string $description;
+    private float $price;
     
     public function setId(int $id) : self
     {
