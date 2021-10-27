@@ -2,24 +2,26 @@
 
 namespace eComairce\Controllers;
 
-use eComairce\Utils\SessionManager;
+use eComairce\Entities\Cart;
+use eComairce\Utils\SessionCartManager;
 use eComairce\Controllers\CoreController;
+use eComairce\Repositories\CartRepository;
 use eComairce\Repositories\ProductRepository;
 
 class CartController extends CoreController
 {
     public function view()
     {
-        dump(SessionManager::getCart());
+        dump(CartRepository::pull());
     }
 
     public function add($productId)
     {
         if ($product = ProductRepository::find($productId)) {
-            SessionManager::addToCart($product);
+            Cart::addProduct($product);
             $this->redirect('/cart');
-            die;
+        } else {
+            $this->redirect('/');
         }
-        $this->redirect('/');
     }
 }
