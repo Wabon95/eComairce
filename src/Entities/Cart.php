@@ -40,7 +40,7 @@ abstract class Cart
         if ($quantity > 0) {
             $product->quantity = $quantity;
             $_SESSION['cart']['products'][$product->getId()] = serialize($product);
-            CartRepository::push(SessionManager::getConnectedUser(), self::getProducts());
+            // CartRepository::push(SessionManager::getConnectedUser(), self::getProducts());
         } else {
             if (isset($_SESSION['cart']['products'][$product->getId()])) {
                 $productFromCart = unserialize($_SESSION['cart']['products'][$product->getId()]);

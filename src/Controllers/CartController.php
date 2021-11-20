@@ -12,7 +12,11 @@ class CartController extends CoreController
 {
     public function view()
     {
-        dump(CartRepository::pull());
+        // dump(CartRepository::pull());
+        $this->render('Cart', [
+            'page_title' => 'eCormairce - Panier',
+            'cart' => CartRepository::pull()
+        ]);
     }
 
     public function add($productId)
